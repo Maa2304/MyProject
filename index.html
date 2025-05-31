@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>كن مُرمّم - البلاغات الإلكترونية</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      font-family: 'Tajawal', sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+    }
+    /* تخصيص أيقونة الملف الشخصي */
+    .profile-icon {
+      background-color: #0037a6;
+      color: white;
+      padding: 12px;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .profile-icon:hover {
+      background-color: #00bd4f;
+      transform: scale(1.1);
+    }
+    /* تخصيص الخريطة */
+    .map-container {
+      width: 100%;
+      height: 300px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+    }
+    .btn {
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.5);
+      opacity: 0;
+      border-radius: 100%;
+      transform: scale(1, 1) translate(-50%);
+      transform-origin: 50% 50%;
+    }
+    .btn:hover:after {
+      animation: ripple 1s ease-out;
+    }
+    @keyframes ripple {
+      0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+      }
+      100% {
+        transform: scale(20, 20);
+        opacity: 0;
+      }
+    }
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 7px 14px rgba(0, 0, 0, 0.15);
+    }
+    .text-primary { color: #0037a6; }
+    .bg-primary { background-color: #0037a6; }
+    .bg-secondary { background-color: #00bd4f; }
+    .text-light { color: #ecf0f1; }
+    /* تخصيص القائمة المنسدلة للغات */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: white;
+      min-width: 180px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border-radius: 10px;
+      overflow: hidden;
+      top: 100%;
+      right: 0;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .dropdown-content a {
+      color: #333;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      transition: all 0.2s;
+    }
+    .dropdown-content a:hover {
+      background-color: #f8f9fa;
+      color: #0037a6;
+    }
+    .dropdown {
+      position: relative;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    /* تخصيص التنبيه الأحمر */
+    .alert {
+      background-color: #fff5f5;
+      color: #e53e3e;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border-left: 4px solid #e53e3e;
+      font-size: 0.9rem;
+    }
+    /* تخصيص الأزرار */
+    .btn-primary {
+      background-color: #0037a6;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .btn-primary:hover {
+      background-color: #002a80;
+    }
+    .btn-secondary {
+      background-color: #00bd4f;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .btn-secondary:hover {
+      background-color: #00a544;
+    }
+    /* تخصيص الحقول */
+    .form-input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      transition: all 0.3s;
+    }
+    .form-input:focus {
+      border-color: #0037a6;
+      box-shadow: 0 0 0 3px rgba(0, 55, 166, 0.2);
+      outline: none;
+    }
+    /* تخصيص مشغل الصوت */
+    .audio-recorder {
+      background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+    .audio-btn {
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .audio-btn-start {
+      background-color: #00bd4f;
+      color: white;
+    }
+    .audio-btn-stop {
+      background-color: #e53e3e;
+      color: white;
+    }
+    .audio-btn-send {
+      background-color: #0037a6;
+      color: white;
+    }
+    .audio-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    /* تخصيص الملف الشخصي */
+    .profile-section {
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    /* تخصيص صفحة تسجيل الدخول */
+    .login-container {
+      background: linear-gradient(135deg, rgba(0, 55, 166, 0.8) 0%, rgba(0, 189, 79, 0.8) 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 400px;
+    }
+    .social-login-btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .google-btn {
+      background-color: #ffffff;
+      color: #333;
+      border: 1px solid #ddd;
+    }
+    .google-btn:hover {
+      background-color: #f1f1f1;
+    }
+    .facebook-btn {
+      background-color: #1877f2;
+      color: white;
+    }
+    .facebook-btn:hover {
+      background-color: #166fe5;
+    }
+    .twitter-btn {
+      background-color: #1da1f2;
+      color: white;
+    }
+    .twitter-btn:hover {
+      background-color: #1a91da;
+    }
+    /* تخصيص الإشعارات */
+    .notification-item {
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      background-color: #f8f9fa;
+      border-left: 4px solid #0037a6;
+      transition: all 0.3s;
+    }
+    .notification-item:hover {
+      background-color: #edf2f7;
+      transform: translateX(-5px);
+    }
+    /* تخصيص الصور المرفوعة */
+    .image-preview {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    /* تخصيص مؤثرات الحركة */
+    .fade-in {
+      animation: fadeIn 0.5s ease;
+    }
+    .slide-in {
+      animation: slideIn 0.5s ease;
+    }
+    @keyframes slideIn {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    /* تخصيص الموجات الصوتية */
+    #waveform {
+      width: 100%;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 10px;
+      margin: 15px 0;
+    }
+    .page.hidden {
+    display: none !important;
+  }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- رأس الصفحة مع اسم المشروع -->
+  <header class="bg-primary text-light py-4 shadow-lg">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+      <div class="flex items-center">
+  <img src="Image كن مرمم (1)(1).png" alt="شعار كن مُرمم" class="w-20 h-20 ml-2">
+  <h1 class="text-3xl font-bold">كن مُرمّم</h1>
+</div>
+
+      <div class="flex items-center space-x-4">
+        <!-- القائمة المنسدلة للغات -->
+        <div class="dropdown relative ml-4">
+          <button class="flex items-center text-white px-3 py-2 rounded-lg hover:bg-blue-800 transition">
+            <i class="fas fa-globe mr-2"></i>
+            <span>اللغات</span>
+            <i class="fas fa-chevron-down text-xs mr-1"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="#" onclick="changeLanguage('العربية')" class="flex items-center">
+              <img src="https://flagcdn.com/w20/sa.png" alt="العربية" class="ml-2">
+              العربية
+            </a>
+            <a href="#" onclick="changeLanguage('الإنجليزية')" class="flex items-center">
+              <img src="https://flagcdn.com/w20/gb.png" alt="الإنجليزية" class="ml-2">
+              الإنجليزية
+            </a>
+            <a href="#" onclick="changeLanguage('الفرنسية')" class="flex items-center">
+              <img src="https://flagcdn.com/w20/fr.png" alt="الفرنسية" class="ml-2">
+              الفرنسية
+            </a>
+            <a href="#" onclick="changeLanguage('الإسبانية')" class="flex items-center">
+              <img src="https://flagcdn.com/w20/es.png" alt="الإسبانية" class="ml-2">
+              الإسبانية
+            </a>
+            <a href="#" onclick="changeLanguage('الكورية')" class="flex items-center">
+              <img src="https://flagcdn.com/w20/kr.png" alt="الكورية" class="ml-2">
+              الكورية
+            </a>
+            <a href="#" onclick="changeLanguage('الصينية')" class="flex items-center">
+              <img src="https://flagcdn.com/w20/cn.png" alt="الصينية" class="ml-2">
+              الصينية
+            </a>
+          </div>
+        </div>
+
+        <!-- أيقونة الملف الشخصي -->
+        <button onclick="openProfile()" class="profile-icon">
+          <i class="fas fa-user"></i>
+        </button>
+
+        <!-- أيقونة الإشعارات -->
+        <button onclick="showPage('notificationsPage')" class="p-3 bg-secondary text-white rounded-full hover:bg-green-600 transition shadow-md relative">
+          <i class="fas fa-bell"></i>
+          <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">2</span>
+        </button>
+      </div>
+    </div>
+  </header>
+<nav class="bg-white shadow-md py-3 px-6 flex justify-center gap-6 text-primary text-lg font-semibold">
+  <button onclick="showPage('homePage')" class="hover:underline">الرئيسية</button>
+  <button onclick="showPage('reportPage')" class="hover:underline">بلاغ جديد</button>
+  <button onclick="showPage('notificationsPage')" class="hover:underline">الإشعارات</button>
+  <button onclick="openProfile()" class="hover:underline">ملفي الشخصي</button>
+</nav>
+
+  <!-- صفحة تسجيل الدخول -->
+  <div id="loginPage" class="page hidden login-container">
+    <div class="login-card slide-in">
+
+      <!-- الشعار -->
+      <div class="text-center mb-6">
+        <div class="inline-block p-3 rounded-full bg-primary text-white text-4xl mb-2">
+          <i class="fas fa-tools"></i>
+        </div>
+        <h2 id="loginTitle" class="text-2xl font-bold text-primary">تسجيل الدخول</h2>
+        <p class="text-gray-600 mt-1">مرحباً بك في منصة كن مُرمّم</p>
+      </div>
+
+      <!-- التنبيه الأحمر -->
+      <div id="loginAlert" class="alert hidden">
+        <i class="fas fa-exclamation-circle ml-2"></i>
+        يرجى إدخال جميع البيانات المطلوبة!
+      </div>
+
+      <!-- النموذج -->
+      <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
+        <div>
+          <label id="usernameLabel" for="username" class="block text-sm font-medium text-gray-700 mb-1">اسم المستخدم</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
+              <i class="fas fa-user"></i>
+            </div>
+            <input type="text" id="username" name="username" class="form-input pr-10" placeholder="أدخل اسم المستخدم" required />
+          </div>
+        </div>
+
+        <div>
+          <label id="passwordLabel" for="password" class="block text-sm font-medium text-gray-700 mb-1">كلمة المرور</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
+              <i class="fas fa-lock"></i>
+            </div>
+            <input type="password" id="password" name="password" class="form-input pr-10" placeholder="أدخل كلمة المرور" required />
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <input id="remember" name="remember" type="checkbox" class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded">
+            <label for="remember" class="mr-2 block text-sm text-gray-700">تذكرني</label>
+          </div>
+          <a href="#" class="text-sm text-primary hover:text-blue-800">نسيت كلمة المرور؟</a>
+        </div>
+
+        <button id="submitBtn" type="submit" class="w-full btn-primary">
+          <i class="fas fa-sign-in-alt ml-2"></i>
+          دخول
+        </button>
+      </form>
+
+      <!-- الفاصل -->
+      <div class="relative flex items-center justify-center my-6">
+        <div class="border-t border-gray-300 w-full"></div>
+        <div class="absolute bg-white px-3 text-gray-500 text-sm">أو</div>
+      </div>
+
+      <!-- أزرار تسجيل الدخول الاجتماعية -->
+      <div class="space-y-3">
+        <!-- Google -->
+        <a href="https://accounts.google.com/signin" target="_blank" class="social-login-btn google-btn">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google Logo" class="w-5 h-5 ml-2">
+          تسجيل الدخول عبر Google
+        </a>
+
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/login" target="_blank" class="social-login-btn facebook-btn">
+          <i class="fab fa-facebook-f ml-2"></i>
+          تسجيل الدخول عبر Facebook
+        </a>
+
+        <!-- Twitter -->
+        <a href="https://twitter.com/i/flow/login" target="_blank" class="social-login-btn twitter-btn">
+          <i class="fab fa-twitter ml-2"></i>
+          تسجيل الدخول عبر Twitter
+        </a>
+      </div>
+
+      <!-- رابط إنشاء حساب -->
+      <div class="text-center mt-6">
+        <span class="text-gray-600">ليس لديك حساب؟</span>
+        <a href="#" onclick="showPage('registerPage')" class="text-primary hover:underline mr-1">
+  إنشاء حساب جديد
+</a>
+
+      </div>
+    </div>
+  </div>
+<!-- صفحة إنشاء حساب كاملة -->
+<div id="registerPage" class="page hidden login-container">
+  <div class="login-card slide-in">
+    <div class="text-center mb-6">
+      <div class="inline-block p-3 rounded-full bg-secondary text-white text-4xl mb-2">
+        <i class="fas fa-user-plus"></i>
+      </div>
+      <h2 class="text-2xl font-bold text-secondary">إنشاء حساب جديد</h2>
+      <p class="text-gray-600 mt-1">يرجى إدخال بياناتك لتسجيل حساب</p>
+    </div>
+
+    <form id="registerForm" onsubmit="handleRegister(event)" class="space-y-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">الاسم الأول</label>
+          <input type="text" id="firstName" class="form-input" required />
+        </div>
+        <div>
+          <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">الاسم الأخير</label>
+          <input type="text" id="lastName" class="form-input" required />
+        </div>
+      </div>
+
+      
+
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">البريد الإلكتروني (اختياري)</label>
+        <input type="email" id="email" class="form-input" />
+      </div>
+
+      <div>
+        <label for="usernameReg" class="block text-sm font-medium text-gray-700 mb-1">اسم المستخدم</label>
+        <input type="text" id="usernameReg" class="form-input" required />
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label for="passwordReg" class="block text-sm font-medium text-gray-700 mb-1">كلمة المرور</label>
+          <input type="password" id="passwordReg" class="form-input" required />
+        </div>
+        <div>
+          <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-1">تأكيد كلمة المرور</label>
+          <input type="password" id="confirmPassword" class="form-input" required />
+        </div>
+      </div>
+
+      <button type="submit" class="btn-secondary w-full">
+        <i class="fas fa-user-plus ml-2"></i>
+        إنشاء الحساب
+      </button>
+
+      <div class="text-center mt-4">
+        <a href="#" onclick="showPage('loginPage')" class="text-primary hover:underline">
+          <i class="fas fa-arrow-right ml-1"></i> العودة لتسجيل الدخول
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+
+  <!-- الصفحة الرئيسية بعد تسجيل الدخول -->
+  <div id="homePage" class="page hidden p-4 container mx-auto">
+    <div class="card p-6 mb-6 slide-in">
+      <h2 class="text-2xl font-bold text-primary mb-4">مرحباً بك في منصة كن مُرمّم</h2>
+      <p class="text-gray-600 mb-4">يمكنك الإبلاغ عن المشاكل في منطقتك والمساهمة في تحسين البيئة المحيطة</p>
+      
+      <div class="map-container mb-6">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d844947.2606000743!2d35.45501546411402!3d31.31131866400215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15006f49d14ef7bb%3A0x13e5c7c4d364421b!2z2KfZhNmF2YjYp9iq!5e0!3m2!1sar!2sjo!4v1623233302519!5m2!1sar!2sjo" 
+          width="100%" 
+          height="300" 
+          style="border:0; border-radius: 15px;" 
+          allowfullscreen="" 
+          loading="lazy">
+        </iframe>
+      </div>
+      
+      <button id="newReportBtn" onclick="showPage('reportPage')" class="btn-primary w-full flex items-center justify-center">
+        <i class="fas fa-plus-circle ml-2"></i>
+        الإبلاغ عن مشكلة جديدة
+      </button>
+    </div>
+
+    <div class="card p-6 slide-in">
+      <h2 id="lastReportsTitle" class="text-2xl font-bold text-primary mb-4">آخر البلاغات:</h2>
+      <div class="space-y-4">
+        <div class="bg-blue-50 p-4 rounded-lg border-r-4 border-blue-500 hover:shadow-md transition">
+          <div class="flex items-center">
+            <div class="bg-blue-100 p-3 rounded-full ml-3">
+              <i class="fas fa-lightbulb text-blue-500"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold">انقطاع الإنارة في المنطقة 3</h3>
+              <div class="flex items-center text-sm text-gray-500 mt-1">
+                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">تم الإصلاح</span>
+                <span class="mx-2">•</span>
+                <i class="far fa-calendar-alt ml-1"></i>
+                <span>2024/10/23</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-green-50 p-4 rounded-lg border-r-4 border-green-500 hover:shadow-md transition">
+          <div class="flex items-center">
+            <div class="bg-green-100 p-3 rounded-full ml-3">
+              <i class="fas fa-trash-alt text-green-500"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold">تراكم النفايات (نظافة)</h3>
+              <div class="flex items-center text-sm text-gray-500 mt-1">
+                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">تم معالجته</span>
+                <span class="mx-2">•</span>
+                <i class="far fa-calendar-alt ml-1"></i>
+                <span>2024/10/22</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-yellow-50 p-4 rounded-lg border-r-4 border-yellow-500 hover:shadow-md transition">
+          <div class="flex items-center">
+            <div class="bg-yellow-100 p-3 rounded-full ml-3">
+              <i class="fas fa-road text-yellow-500"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold">حفرة في الشارع الرئيسي</h3>
+              <div class="flex items-center text-sm text-gray-500 mt-1">
+                <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">قيد المعالجة</span>
+                <span class="mx-2">•</span>
+                <i class="far fa-calendar-alt ml-1"></i>
+                <span>2024/10/20</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- صفحة الإبلاغ عن مشكلة -->
+  <div id="reportPage" class="page hidden p-4 container mx-auto">
+    <div class="card p-6 slide-in">
+      <div class="flex items-center mb-6">
+        <div class="bg-primary p-3 rounded-full ml-3 text-white">
+          <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <h2 id="reportTitle" class="text-2xl font-bold text-primary">الإبلاغ عن مشكلة</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <label id="categoryLabel" for="categorySelect" class="block text-sm font-medium text-gray-700 mb-2">تصنيف المشكلة:</label>
+          <div class="relative">
+            <select id="categorySelect" name="category" class="form-input appearance-none" required>
+              <option value="" disabled selected>🔽 اختر تصنيفًا</option>
+              <option value="صرف صحي">💧 صرف صحي</option>
+              <option value="غرس الأشجار">🌱 غرس الأشجار</option>
+              <option value="حفر ومطبات">⚠️ حفر طرق</option>
+              <option value="إنارة">🔦 عطل في إنارة الشوارع</option>
+              <option value="أضرار الأرصفة">🚧 أضرار الأرصفة</option>
+              <option value="سلة مهملات">🗑️ سلة مهملات</option>
+              <option value="تعطل إشارات مرورية">🚥 تعطل إشارات مرورية</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-2 text-gray-700">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <label id="priorityLabel" for="prioritySelect" class="block text-sm font-medium text-gray-700 mb-2">أولوية المشكلة:</label>
+          <div class="relative">
+            <select id="prioritySelect" name="priority" class="form-input appearance-none" required>
+              <option value="" disabled selected>🔽 اختر أولوية</option>
+              <option value="عاجلة">⏱️ عاجلة</option>
+              <option value="عادية">🕒 عادية</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-2 text-gray-700">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <label id="descriptionLabel" for="description" class="block text-sm font-medium text-gray-700 mb-2">وصف المشكلة:</label>
+        <textarea id="description" name="description" class="form-input" rows="4" placeholder="يرجى وصف المشكلة بالتفصيل..." required></textarea>
+      </div>
+      
+      <div class="mb-6">
+        <label class="block text-sm font-medium text-gray-700 mb-2">الموقع:</label>
+        <div class="map-container">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d844947.2606000743!2d35.45501546411402!3d31.31131866400215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15006f49d14ef7bb%3A0x13e5c7c4d364421b!2z2KfZhNmF2YjYp9iq!5e0!3m2!1sar!2sjo!4v1623233302519!5m2!1sar!2sjo" 
+            width="100%" 
+            height="200" 
+            style="border:0; border-radius: 10px;" 
+            allowfullscreen="" 
+            loading="lazy">
+          </iframe>
+        </div>
+        <p class="text-sm text-gray-500 mt-2">
+          <i class="fas fa-info-circle ml-1"></i>
+          انقر على الخريطة لتحديد موقع المشكلة بدقة
+        </p>
+      </div>
+      
+      <div class="mb-6">
+        <button type="button" id="addImageBtn" onclick="openImageSelector()" class="btn-secondary flex items-center justify-center w-full">
+          <i class="fas fa-camera ml-2"></i>
+          إضافة صورة
+        </button>
+        <input type="file" id="imageInput" class="hidden" accept="image/*" onchange="handleImageUpload(event)">
+        <img id="imagePreview" src="" alt="معاينة الصورة" class="hidden w-full mt-4 rounded-lg image-preview">
+      </div>
+      
+      <!-- قسم تسجيل الصوت -->
+      <div class="audio-recorder mb-6">
+        <h3 class="text-lg font-semibold mb-3 flex items-center">
+          <i class="fas fa-microphone ml-2 text-primary"></i>
+          تسجيل صوتي
+        </h3>
+        
+        <div class="flex flex-wrap justify-center gap-3 mb-4">
+          <button id="startBtn" class="audio-btn audio-btn-start flex items-center">
+            <i class="fas fa-microphone ml-2"></i>
+            ابدأ التسجيل
+          </button>
+          <button id="stopBtn" class="audio-btn audio-btn-stop flex items-center" disabled>
+            <i class="fas fa-stop-circle ml-2"></i>
+            أوقف
+          </button>
+          <button id="sendBtn" class="audio-btn audio-btn-send flex items-center hidden">
+            <i class="fas fa-paper-plane ml-2"></i>
+            أرسل التسجيل
+          </button>
+        </div>
+        
+        <!-- مشغل الصوت بعد التسجيل -->
+        <div id="audioPlayer" class="hidden">
+          <div id="waveform"></div>
+          <audio id="recordedAudio" controls class="w-full"></audio>
+        </div>
+      </div>
+      
+      <button id="sendReportBtn" onclick="submitReport()" class="btn-primary w-full flex items-center justify-center">
+        <i class="fas fa-paper-plane ml-2"></i>
+        إرسال البلاغ
+      </button>
+    </div>
+  </div>
+
+  <!-- صفحة الإشعارات -->
+  <div id="notificationsPage" class="page hidden fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-75 p-4 z-50 flex items-center justify-center">
+    <div class="card bg-white p-6 relative max-w-md w-full slide-in">
+      <div class="flex items-center justify-between mb-6">
+        <h2 id="notificationsTitle" class="text-2xl font-bold text-primary flex items-center">
+          <i class="fas fa-bell ml-2"></i>
+          الإشعارات
+        </h2>
+        <button id="closeBtn" onclick="closeNotifications()" class="text-gray-500 hover:text-gray-700 transition">
+          <i class="fas fa-times text-xl"></i>
+        </button>
+      </div>
+      
+      <div class="space-y-4 max-h-96 overflow-y-auto">
+        <div class="notification-item">
+          <div class="flex items-start">
+            <div class="bg-green-100 p-2 rounded-full ml-3">
+              <i class="fas fa-check text-green-500"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold">تم معالجة بلاغك عن مشكلة الطرق</h3>
+              <p class="text-sm text-gray-600 mt-1">تم إصلاح الحفرة في الشارع الرئيسي بنجاح.</p>
+              <div class="flex items-center text-xs text-gray-500 mt-2">
+                <i class="far fa-clock ml-1"></i>
+                <span>منذ 3 ساعات</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="notification-item">
+          <div class="flex items-start">
+            <div class="bg-blue-100 p-2 rounded-full ml-3">
+              <i class="fas fa-sync-alt text-blue-500"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold">بلاغك عن الإنارة في المنطقة 2 قيد المتابعة</h3>
+              <p class="text-sm text-gray-600 mt-1">تم تحويل البلاغ للفريق المختص وسيتم معالجته قريباً.</p>
+              <div class="flex items-center text-xs text-gray-500 mt-2">
+                <i class="far fa-clock ml-1"></i>
+                <span>منذ يوم واحد</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="notification-item">
+          <div class="flex items-start">
+            <div class="bg-yellow-100 p-2 rounded-full ml-3">
+              <i class="fas fa-exclamation-triangle text-yellow-500"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold">تحديث حالة البلاغ: صيانة الرصيف</h3>
+              <p class="text-sm text-gray-600 mt-1">تم جدولة الصيانة ليوم الخميس القادم.</p>
+              <div class="flex items-center text-xs text-gray-500 mt-2">
+                <i class="far fa-clock ml-1"></i>
+                <span>منذ 3 أيام</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- صفحة الملف الشخصي -->
+  <div id="profilePage" class="page hidden p-4 container mx-auto">
+    <div id="profileSection" class="profile-section p-6 slide-in">
+      <div class="flex flex-col md:flex-row items-start gap-6">
+        <div class="w-full md:w-1/3 flex flex-col items-center">
+          <div class="w-32 h-32 rounded-full bg-gray-200 flex items-center justify-center mb-4 border-4 border-primary">
+            <i class="fas fa-user text-5xl text-gray-400"></i>
+          </div>
+          <h2 class="text-xl font-bold">أحمد محمد</h2>
+          <p class="text-gray-600">ahmed@example.com</p>
+          <div class="mt-4 flex space-x-2">
+            <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+              <i class="fas fa-edit ml-1"></i>
+              تعديل
+            </button>
+            <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition">
+              <i class="fas fa-cog ml-1"></i>
+              الإعدادات
+            </button>
+          </div>
+        </div>
+        
+        <div class="w-full md:w-2/3">
+          <h3 class="text-xl font-bold mb-4 text-primary border-b pb-2">بلاغاتي</h3>
+          
+          <div class="space-y-4">
+            <div class="bg-white p-4 rounded-lg border hover:shadow-md transition">
+              <div class="flex justify-between">
+                <h4 class="font-semibold">حفرة في الشارع الرئيسي</h4>
+                <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">قيد المعالجة</span>
+              </div>
+              <p class="text-sm text-gray-600 mt-2">حفرة كبيرة تسبب مشاكل للسيارات في الشارع الرئيسي بالقرب من المدرسة.</p>
+              <div class="flex items-center text-xs text-gray-500 mt-2">
+                <i class="far fa-calendar-alt ml-1"></i>
+                <span>2024/10/20</span>
+              </div>
+            </div>
+            
+            <div class="bg-white p-4 rounded-lg border hover:shadow-md transition">
+              <div class="flex justify-between">
+                <h4 class="font-semibold">انقطاع الإنارة في المنطقة 3</h4>
+                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">تم الإصلاح</span>
+              </div>
+              <p class="text-sm text-gray-600 mt-2">انقطاع في إنارة الشارع مما يسبب ظلاماً في المنطقة ليلاً.</p>
+              <div class="flex items-center text-xs text-gray-500 mt-2">
+                <i class="far fa-calendar-alt ml-1"></i>
+                <span>2024/10/23</span>
+              </div>
+            </div>
+            
+            <div class="bg-white p-4 rounded-lg border hover:shadow-md transition">
+              <div class="flex justify-between">
+                <h4 class="font-semibold">تراكم النفايات</h4>
+                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">تم معالجته</span>
+              </div>
+              <p class="text-sm text-gray-600 mt-2">تراكم النفايات بالقرب من الحديقة العامة يسبب روائح كريهة.</p>
+              <div class="flex items-center text-xs text-gray-500 mt-2">
+                <i class="far fa-calendar-alt ml-1"></i>
+                <span>2024/10/22</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-6">
+            <h3 class="text-xl font-bold mb-4 text-primary border-b pb-2">إحصائيات</h3>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+              <div class="bg-blue-50 p-4 rounded-lg text-center">
+                <div class="text-3xl font-bold text-blue-600">3</div>
+                <div class="text-sm text-gray-600">إجمالي البلاغات</div>
+              </div>
+              <div class="bg-green-50 p-4 rounded-lg text-center">
+                <div class="text-3xl font-bold text-green-600">2</div>
+                <div class="text-sm text-gray-600">بلاغات تم حلها</div>
+              </div>
+              <div class="bg-yellow-50 p-4 rounded-lg text-center">
+                <div class="text-3xl font-bold text-yellow-600">1</div>
+                <div class="text-sm text-gray-600">بلاغات قيد المعالجة</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <script src="https://unpkg.com/wavesurfer.js@6.6.3"></script>
+<script>
+  // دالة التنقل بين الصفحات
+  function showPage(page) {
+    const pages = document.querySelectorAll('.page');
+    pages.forEach((p) => p.classList.add('hidden'));
+    const targetPage = document.getElementById(page);
+    if (targetPage) {
+      targetPage.classList.remove('hidden');
+    }
+  }
+
+  // إرسال البلاغ
+  function submitReport() {
+    const successMessage = document.createElement('div');
+    successMessage.className = 'fixed top-4 right-4 bg-green-500 text-white p-4 rounded-lg shadow-lg z-50 slide-in';
+    successMessage.innerHTML = '<div class="flex items-center"><i class="fas fa-check-circle ml-2 text-xl"></i><span>تم إرسال البلاغ بنجاح!</span></div>';
+    document.body.appendChild(successMessage);
+    setTimeout(() => {
+      successMessage.classList.add('fade-out');
+      setTimeout(() => {
+        document.body.removeChild(successMessage);
+        showPage('homePage');
+      }, 500);
+    }, 3000);
+  }
+
+  // فتح صفحة الملف الشخصي
+  function openProfile() {
+    showPage('profilePage');
+  }
+
+  // تغيير اللغة
+  function changeLanguage(language) {
+    alert("تم تغيير اللغة إلى: " + language); // تبسيط للعرض
+  }
+
+  // إغلاق الإشعارات
+  function closeNotifications() {
+    document.getElementById('notificationsPage').classList.add('hidden');
+  }
+
+  // تسجيل الدخول
+  function handleLogin(event) {
+    event.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    if (username === "" || password === "") {
+      document.getElementById('loginAlert').style.display = 'block';
+    } else {
+      document.getElementById('loginAlert').style.display = 'none';
+      showPage('homePage');
+    }
+  }
+
+  // تحميل الصفحة
+  window.onload = function () {
+    showPage('loginPage');
+    initAudioRecorder();
+  };
+
+  // صورة مرفقة
+  function openImageSelector() {
+    document.getElementById('imageInput').click();
+  }
+
+  function handleImageUpload(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        document.getElementById('imagePreview').src = e.target.result;
+        document.getElementById('imagePreview').classList.remove('hidden');
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  // التسجيل الصوتي
+  function initAudioRecorder() {
+    let mediaRecorder;
+    let audioChunks = [];
+    let wavesurfer;
+
+    const startBtn = document.getElementById("startBtn");
+    const stopBtn = document.getElementById("stopBtn");
+    const sendBtn = document.getElementById("sendBtn");
+    const audioPlayer = document.getElementById("audioPlayer");
+    const recordedAudio = document.getElementById("recordedAudio");
+
+    wavesurfer = WaveSurfer.create({
+      container: '#waveform',
+      waveColor: '#4a83ff',
+      progressColor: '#1e40af',
+      cursorColor: '#0037a6',
+      barWidth: 3,
+      barRadius: 3,
+      cursorWidth: 1,
+      height: 80,
+      barGap: 2
+    });
+
+    startBtn.addEventListener("click", async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
+        audioChunks = [];
+
+        mediaRecorder.addEventListener("dataavailable", event => {
+          audioChunks.push(event.data);
+        });
+
+        mediaRecorder.addEventListener("stop", () => {
+          const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+          const audioUrl = URL.createObjectURL(audioBlob);
+          recordedAudio.src = audioUrl;
+          audioPlayer.classList.remove("hidden");
+          sendBtn.classList.remove("hidden");
+          wavesurfer.load(audioUrl);
+        });
+
+        mediaRecorder.start();
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
+
+        const recordingMessage = document.createElement('div');
+        recordingMessage.className = 'fixed top-4 right-4 bg-red-500 text-white p-4 rounded-lg shadow-lg z-50 slide-in flex items-center';
+        recordingMessage.innerHTML = '<i class="fas fa-microphone-alt ml-2 text-xl"></i><span>جاري التسجيل...</span>';
+        recordingMessage.id = 'recordingMessage';
+        document.body.appendChild(recordingMessage);
+      } catch (err) {
+        console.error("Error accessing microphone:", err);
+        alert("لا يمكن الوصول إلى الميكروفون. يرجى التحقق من الإذن.");
+      }
+    });
+
+    stopBtn.addEventListener("click", () => {
+      if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+        mediaRecorder.stop();
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+
+        const recordingMessage = document.getElementById('recordingMessage');
+        if (recordingMessage) {
+          recordingMessage.classList.add('fade-out');
+          setTimeout(() => {
+            document.body.removeChild(recordingMessage);
+          }, 500);
+        }
+      }
+    });
+
+    sendBtn.addEventListener("click", () => {
+      alert("تم إرسال التسجيل الصوتي بنجاح!");
+      audioPlayer.classList.add("hidden");
+      sendBtn.classList.add("hidden");
+    });
+  }
+  function handleRegister(event) {
+  event.preventDefault();
+
+  const firstName = document.getElementById('firstName').value.trim();
+  const lastName = document.getElementById('lastName').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const username = document.getElementById('usernameReg').value.trim();
+  const password = document.getElementById('passwordReg').value;
+  const confirmPassword = document.getElementById('confirmPassword').value;
+
+  if (!firstName || !lastName || !phone || !username || !password || !confirmPassword) {
+    alert("❗ يرجى تعبئة جميع الحقول المطلوبة.");
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    alert("❗ كلمتا المرور غير متطابقتين.");
+    return;
+  }
+
+  alert(`✅ تم إنشاء الحساب بنجاح:
+  الاسم: ${firstName} ${lastName}
+  الهاتف: ${phone}
+  اسم المستخدم: ${username}
+  `);
+
+  showPage('loginPage');
+}
+
+</script>
+
+</body>
+</html>
